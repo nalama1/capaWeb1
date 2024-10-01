@@ -1,0 +1,14 @@
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\capaNegocio.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\capaNegocio.pdb
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\obj\Debug\capaNegocio.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\obj\Debug\capaNegocio.pdb
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\obj\Debug\capaNegocio.csprojResolveAssemblyReference.cache
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\capaAccesoDatos.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\Entidades.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\capaAccesoDatos.pdb
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\Entidades.pdb
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\System.Web.Http.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\Newtonsoft.Json.dll
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\System.Web.Http.xml
+C:\Users\DETPC\source\repos\capaWeb1\capaNegocio\bin\Debug\System.Net.Http.Formatting.xml

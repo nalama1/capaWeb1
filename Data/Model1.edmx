@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Prueba1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarritoItem">
+          <Key>
+            <PropertyRef Name="CarritoItemID" />
+          </Key>
+          <Property Name="CarritoItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoID" Type="int" Nullable="false" />
+          <Property Name="CantidadSeleccionada" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="CiudadID" />
+          </Key>
+          <Property Name="CiudadID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="300" />
+          <Property Name="PaisID" Type="int" />
+        </EntityType>
+        <EntityType Name="OrdenDetalles">
+          <Key>
+            <PropertyRef Name="OrdenDetalleID" />
+          </Key>
+          <Property Name="OrdenDetalleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrdenID" Type="int" Nullable="false" />
+          <Property Name="ProductoID" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="OrdenID" />
+          </Key>
+          <Property Name="OrdenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="DireccionEntrega" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="PaisID" />
+          </Key>
+          <Property Name="PaisID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoID" />
+          </Key>
+          <Property Name="ProductoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="300" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CantidadDisponible" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="300" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="PaisID" Type="int" />
+          <Property Name="CiudadID" Type="int" />
+        </EntityType>
+        <Association Name="FK__CarritoIt__Produ__3D5E1FD2">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="CarritoItem" Type="Self.CarritoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="CarritoItem">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ciudades__PaisID__49C3F6B7">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+          <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisID" />
+            </Principal>
+            <Dependent Role="Ciudades">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenDeta__Orden__4316F928">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+          <End Role="OrdenDetalles" Type="Self.OrdenDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenID" />
+            </Principal>
+            <Dependent Role="OrdenDetalles">
+              <PropertyRef Name="OrdenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenDeta__Produ__440B1D61">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="OrdenDetalles" Type="Self.OrdenDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="OrdenDetalles">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Prueba1ModelStoreContainer">
+          <EntitySet Name="CarritoItem" EntityType="Self.CarritoItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenDetalles" EntityType="Self.OrdenDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CarritoIt__Produ__3D5E1FD2" Association="Self.FK__CarritoIt__Produ__3D5E1FD2">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="CarritoItem" EntitySet="CarritoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ciudades__PaisID__49C3F6B7" Association="Self.FK__Ciudades__PaisID__49C3F6B7">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Ciudades" EntitySet="Ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenDeta__Orden__4316F928" Association="Self.FK__OrdenDeta__Orden__4316F928">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenDetalles" EntitySet="OrdenDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenDeta__Produ__440B1D61" Association="Self.FK__OrdenDeta__Produ__440B1D61">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenDetalles" EntitySet="OrdenDetalles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Prueba1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarritoItem">
+          <Key>
+            <PropertyRef Name="CarritoItemID" />
+          </Key>
+          <Property Name="CarritoItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoID" Type="Int32" Nullable="false" />
+          <Property Name="CantidadSeleccionada" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__CarritoIt__Produ__3D5E1FD2" FromRole="CarritoItem" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="CiudadID" />
+          </Key>
+          <Property Name="CiudadID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PaisID" Type="Int32" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK__Ciudades__PaisID__49C3F6B7" FromRole="Ciudades" ToRole="Paises" />
+        </EntityType>
+        <EntityType Name="OrdenDetalles">
+          <Key>
+            <PropertyRef Name="OrdenDetalleID" />
+          </Key>
+          <Property Name="OrdenDetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrdenID" Type="Int32" Nullable="false" />
+          <Property Name="ProductoID" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK__OrdenDeta__Orden__4316F928" FromRole="OrdenDetalles" ToRole="Ordenes" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__OrdenDeta__Produ__440B1D61" FromRole="OrdenDetalles" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="OrdenID" />
+          </Key>
+          <Property Name="OrdenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estatus" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DireccionEntrega" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OrdenDetalles" Relationship="Self.FK__OrdenDeta__Orden__4316F928" FromRole="Ordenes" ToRole="OrdenDetalles" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="PaisID" />
+          </Key>
+          <Property Name="PaisID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ciudades" Relationship="Self.FK__Ciudades__PaisID__49C3F6B7" FromRole="Paises" ToRole="Ciudades" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="ProductoID" />
+          </Key>
+          <Property Name="ProductoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CantidadDisponible" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarritoItem" Relationship="Self.FK__CarritoIt__Produ__3D5E1FD2" FromRole="Producto" ToRole="CarritoItem" />
+          <NavigationProperty Name="OrdenDetalles" Relationship="Self.FK__OrdenDeta__Produ__440B1D61" FromRole="Producto" ToRole="OrdenDetalles" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="PaisID" Type="Int32" />
+          <Property Name="CiudadID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__CarritoIt__Produ__3D5E1FD2">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="CarritoItem" Type="Self.CarritoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="CarritoItem">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ciudades__PaisID__49C3F6B7">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+          <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="PaisID" />
+            </Principal>
+            <Dependent Role="Ciudades">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenDeta__Orden__4316F928">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+          <End Role="OrdenDetalles" Type="Self.OrdenDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenID" />
+            </Principal>
+            <Dependent Role="OrdenDetalles">
+              <PropertyRef Name="OrdenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdenDeta__Produ__440B1D61">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="OrdenDetalles" Type="Self.OrdenDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ProductoID" />
+            </Principal>
+            <Dependent Role="OrdenDetalles">
+              <PropertyRef Name="ProductoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Prueba1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarritoItem" EntityType="Self.CarritoItem" />
+          <EntitySet Name="Ciudades" EntityType="Self.Ciudades" />
+          <EntitySet Name="OrdenDetalles" EntityType="Self.OrdenDetalles" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__CarritoIt__Produ__3D5E1FD2" Association="Self.FK__CarritoIt__Produ__3D5E1FD2">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="CarritoItem" EntitySet="CarritoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ciudades__PaisID__49C3F6B7" Association="Self.FK__Ciudades__PaisID__49C3F6B7">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Ciudades" EntitySet="Ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenDeta__Orden__4316F928" Association="Self.FK__OrdenDeta__Orden__4316F928">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenDetalles" EntitySet="OrdenDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdenDeta__Produ__440B1D61" Association="Self.FK__OrdenDeta__Produ__440B1D61">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="OrdenDetalles" EntitySet="OrdenDetalles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Prueba1ModelStoreContainer" CdmEntityContainer="Prueba1Entities">
+          <EntitySetMapping Name="CarritoItem">
+            <EntityTypeMapping TypeName="Prueba1Model.CarritoItem">
+              <MappingFragment StoreEntitySet="CarritoItem">
+                <ScalarProperty Name="CarritoItemID" ColumnName="CarritoItemID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="CantidadSeleccionada" ColumnName="CantidadSeleccionada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudades">
+            <EntityTypeMapping TypeName="Prueba1Model.Ciudades">
+              <MappingFragment StoreEntitySet="Ciudades">
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenDetalles">
+            <EntityTypeMapping TypeName="Prueba1Model.OrdenDetalles">
+              <MappingFragment StoreEntitySet="OrdenDetalles">
+                <ScalarProperty Name="OrdenDetalleID" ColumnName="OrdenDetalleID" />
+                <ScalarProperty Name="OrdenID" ColumnName="OrdenID" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="Prueba1Model.Ordenes">
+              <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="OrdenID" ColumnName="OrdenID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="DireccionEntrega" ColumnName="DireccionEntrega" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="Prueba1Model.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="Prueba1Model.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="CantidadDisponible" ColumnName="CantidadDisponible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Prueba1Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

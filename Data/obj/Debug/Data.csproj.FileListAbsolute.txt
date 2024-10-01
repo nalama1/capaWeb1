@@ -1,0 +1,10 @@
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\Data.dll.config
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\Data.dll
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\Data.pdb
+C:\Users\DETPC\source\repos\capaWeb1\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+C:\Users\DETPC\source\repos\capaWeb1\Data\obj\Debug\Data.dll
+C:\Users\DETPC\source\repos\capaWeb1\Data\obj\Debug\Data.pdb
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\EntityFramework.dll
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\EntityFramework.SqlServer.dll
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\EntityFramework.xml
+C:\Users\DETPC\source\repos\capaWeb1\Data\bin\EntityFramework.SqlServer.xml

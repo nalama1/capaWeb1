@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Prueba1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CarritoItem">
+    <Key>
+      <PropertyRef Name="CarritoItemID" />
+    </Key>
+    <Property Name="CarritoItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductoID" Type="Int32" Nullable="false" />
+    <Property Name="CantidadSeleccionada" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK__CarritoIt__Produ__3D5E1FD2" FromRole="CarritoItem" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Ciudades">
+    <Key>
+      <PropertyRef Name="CiudadID" />
+    </Key>
+    <Property Name="CiudadID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="PaisID" Type="Int32" />
+    <NavigationProperty Name="Paises" Relationship="Self.FK__Ciudades__PaisID__49C3F6B7" FromRole="Ciudades" ToRole="Paises" />
+  </EntityType>
+  <EntityType Name="OrdenDetalles">
+    <Key>
+      <PropertyRef Name="OrdenDetalleID" />
+    </Key>
+    <Property Name="OrdenDetalleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrdenID" Type="Int32" Nullable="false" />
+    <Property Name="ProductoID" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="PrecioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Ordenes" Relationship="Self.FK__OrdenDeta__Orden__4316F928" FromRole="OrdenDetalles" ToRole="Ordenes" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK__OrdenDeta__Produ__440B1D61" FromRole="OrdenDetalles" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Ordenes">
+    <Key>
+      <PropertyRef Name="OrdenID" />
+    </Key>
+    <Property Name="OrdenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Estatus" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DireccionEntrega" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="OrdenDetalles" Relationship="Self.FK__OrdenDeta__Orden__4316F928" FromRole="Ordenes" ToRole="OrdenDetalles" />
+  </EntityType>
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="PaisID" />
+    </Key>
+    <Property Name="PaisID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ciudades" Relationship="Self.FK__Ciudades__PaisID__49C3F6B7" FromRole="Paises" ToRole="Ciudades" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="ProductoID" />
+    </Key>
+    <Property Name="ProductoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CantidadDisponible" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CarritoItem" Relationship="Self.FK__CarritoIt__Produ__3D5E1FD2" FromRole="Producto" ToRole="CarritoItem" />
+    <NavigationProperty Name="OrdenDetalles" Relationship="Self.FK__OrdenDeta__Produ__440B1D61" FromRole="Producto" ToRole="OrdenDetalles" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="PaisID" Type="Int32" />
+    <Property Name="CiudadID" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__CarritoIt__Produ__3D5E1FD2">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="CarritoItem" Type="Self.CarritoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ProductoID" />
+      </Principal>
+      <Dependent Role="CarritoItem">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ciudades__PaisID__49C3F6B7">
+    <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="PaisID" />
+      </Principal>
+      <Dependent Role="Ciudades">
+        <PropertyRef Name="PaisID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenDeta__Orden__4316F928">
+    <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+    <End Role="OrdenDetalles" Type="Self.OrdenDetalles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordenes">
+        <PropertyRef Name="OrdenID" />
+      </Principal>
+      <Dependent Role="OrdenDetalles">
+        <PropertyRef Name="OrdenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrdenDeta__Produ__440B1D61">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="OrdenDetalles" Type="Self.OrdenDetalles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ProductoID" />
+      </Principal>
+      <Dependent Role="OrdenDetalles">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Prueba1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CarritoItem" EntityType="Self.CarritoItem" />
+    <EntitySet Name="Ciudades" EntityType="Self.Ciudades" />
+    <EntitySet Name="OrdenDetalles" EntityType="Self.OrdenDetalles" />
+    <EntitySet Name="Ordenes" EntityType="Self.Ordenes" />
+    <EntitySet Name="Paises" EntityType="Self.Paises" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__CarritoIt__Produ__3D5E1FD2" Association="Self.FK__CarritoIt__Produ__3D5E1FD2">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="CarritoItem" EntitySet="CarritoItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ciudades__PaisID__49C3F6B7" Association="Self.FK__Ciudades__PaisID__49C3F6B7">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="Ciudades" EntitySet="Ciudades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenDeta__Orden__4316F928" Association="Self.FK__OrdenDeta__Orden__4316F928">
+      <End Role="Ordenes" EntitySet="Ordenes" />
+      <End Role="OrdenDetalles" EntitySet="OrdenDetalles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrdenDeta__Produ__440B1D61" Association="Self.FK__OrdenDeta__Produ__440B1D61">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="OrdenDetalles" EntitySet="OrdenDetalles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,60 @@
+﻿@model List<Entidades.Producto>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Listado de Productos</h1>
+    <p class="lead">/Account/Register</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Autora:</h2>
+        <p>
+            Adela Lorena Cujilema
+        </p>
+    </div>
+</div>
+
+
+
+
+
+<table class="table table-responsive">
+    <tr>
+        <th>ProductoID</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>CantidadDisponible</th> 
+        <th>Accion</th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductoID</td>
+            <td>@item.Nombre</td>
+            <td>@item.Descripcion</td>
+            <td>@item.Precio</td>
+            <td>@item.CantidadDisponible</td>
+            <td>
+            
+                <a href="@Url.Action("About", "Home")">Añadir a carrito</a>            
+            
+            </td>
+
+
+            @*<td>
+                <a href="@Url.Action("AgregarAlCarrito", "Carrito", new { id = producto.ProductoID })">Agregar al Carrito</a>
+            </td>*@
+
+        </tr>
+    }
+
+</table>
+
