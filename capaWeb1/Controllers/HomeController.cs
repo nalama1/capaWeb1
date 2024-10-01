@@ -1,5 +1,5 @@
 ﻿using capaNegocio; //Lorena Cujilema 30 septiembre 2024
-using Entidades;
+using Entidades; //Adela Cujilema 01 octubre 2024
 using System;
 using System.Collections.Generic;
 using System.Linq;
