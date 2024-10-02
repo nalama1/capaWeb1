@@ -83,7 +83,7 @@ namespace capaAccesoDatos
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand("SELECT * FROM Producto WHERE ProductoID = @ProductoID", con))
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        //cmd.CommandType = System.Data.CommandType.StoredProcedure;// solo poner cuando SqlCommand sea un nombre de SP. OJO
                         cmd.Parameters.AddWithValue("@ProductoID", id);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
