@@ -1,7 +1,9 @@
-﻿@model List<Entidades.Producto>
+﻿@model List<Entidades.Producto> 
 
 @{
     ViewBag.Title = "Home Page";
+    @*comentario: Producto y CarritoItem sin vistas iguales*@
+
 }
 
 <div class="jumbotron">
@@ -14,7 +16,7 @@
     <div class="col-md-4">
         <h2>Autora:</h2>
         <p>
-            Adela Lorena Cujilema
+            Adela Lorena Cujilema tt
         </p>
     </div>
 </div>
@@ -44,17 +46,17 @@
             <td>@item.CantidadDisponible</td>
             <td>
             
-                <a href="@Url.Action("About", "Home")">Añadir a carrito</a>            
+                <a href="@Url.Action("AgregarAlCarrito", "Carrito", new { codigo = item.ProductoID })">Añadir a carrito</a>            
             
             </td>
-
-
             @*<td>
                 <a href="@Url.Action("AgregarAlCarrito", "Carrito", new { id = producto.ProductoID })">Agregar al Carrito</a>
             </td>*@
-
         </tr>
     }
-
 </table>
+
+@*comentario: Producto y CarritoItem sin vistas iguales*@
+
+
 
