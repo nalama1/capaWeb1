@@ -18,7 +18,7 @@ namespace capaWeb1.Controllers
 
         public ActionResult AgregarAlCarrito(int codigo)
         {
-            var producto = _productoBusiness.ObtenerProductoEspecifico(codigo);
+            //var producto = _productoBusiness.ObtenerProductoEspecifico(codigo);
             var carrito = Session["Carrito"] as List<CarritoItem>;
 
             if(carrito == null)
@@ -26,6 +26,7 @@ namespace capaWeb1.Controllers
                 carrito = new List<CarritoItem>();
             }
 
+            var producto = _productoBusiness.ObtenerProductoEspecifico(codigo);
             carrito.Add(new CarritoItem
             {
                 Producto = producto,
@@ -45,6 +46,26 @@ namespace capaWeb1.Controllers
             }
 
             return View(carrito);
+        }
+
+        //nuevo: 2 octubre 2024
+        public ActionResult RegistrarCompra()
+        {
+            var carrito = Session["carrito"] as List<CarritoItem>;
+            if (carrito == null || !carrito.Any())
+            {
+                return RedirectToAction("Listado", "Producto");
+            }
+            var userid = (int) Session["UserID"];
+
+            OrdenCompraBusiness _ordenCompraBusiness = new OrdenCompraBusiness();
+            bool bandera = _ordenCompraBusiness.grabarOrdenCompra(carrito, userid, "");
+
+            if (bandera) { Console.WriteLine("Se grabó correctamente."); }
+
+            Session["carrito"] = null;
+            return View("FinalizarCompra", carrito);
+
         }
 
 	}

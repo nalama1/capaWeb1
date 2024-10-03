@@ -43,7 +43,7 @@ namespace capaAccesoDatos
                             cmd1.Parameters.AddWithValue("@Total", carrito.Sum(x=> x.Total));
                             cmd1.Parameters.AddWithValue("@Estatus", "En proceso");
                             cmd1.Parameters.AddWithValue("@DireccionEntrega", direccionEntrega);
-                            int OrdenID = (int)cmd1.ExecuteScalar();
+                            int OrdenID = (int)cmd1.ExecuteScalar(); // Error here
                             
                             foreach (var item in carrito)
                             {   SqlCommand cmd2 = new SqlCommand(q2, con, transaction);

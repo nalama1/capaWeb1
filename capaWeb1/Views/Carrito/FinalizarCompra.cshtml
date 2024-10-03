@@ -1,0 +1,39 @@
+﻿@model List<Entidades.CarritoItem>
+
+@{
+    ViewBag.Title = "FinalizarCompra";
+}
+<hr />
+<h2>Gracias por su Compra</h2>
+<hr />
+
+<table class="table table-responsive" >
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+    </tr>
+     
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Producto.Nombre</td>
+            <td>@item.Producto.Precio</td>
+            <td>@item.CantidadSeleccionada</td>
+            <td>@item.Total</td>
+        </tr>
+    }
+</table>
+
+<p class="alert-success">Total a pagar es de </p>
+
+<a href="@Url.Action("Listado","Producto")" class="btn btn-success" ></a>
+
+
+
+
+
+
+
+

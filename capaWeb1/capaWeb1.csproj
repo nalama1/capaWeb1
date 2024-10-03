@@ -217,6 +217,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\View1.cshtml" />
     <Content Include="Views\Carrito\Carrito.cshtml" />
+    <Content Include="Views\Carrito\Carrito2.cshtml" />
+    <Content Include="Views\Carrito\FinalizarCompra.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

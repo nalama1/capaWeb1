@@ -1,39 +1,56 @@
-﻿@model IEnumerable<Entidades.CarritoItem>
+﻿@model List<Entidades.CarritoItem>
 
 @{
-    ViewBag.Title = "Carrito";
+    ViewBag.Title = "Carrito2";
 }
 
-<h2>Carrito</h2>
+<h2>Carrito2</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+
+<table class="table table-responsive">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CantidadSeleccionada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th></th>
+        <th> Producto</th>
+        <th> Cantidad</th>
+        <th> Precio</th>
+        <th> Total</th>
     </tr>
 
-@foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CantidadSeleccionada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        <td>Lorena Cujilema</td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
-}
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Producto.Nombre</td>
+            <td>@item.CantidadSeleccionada</td>
+            <td>@item.Producto.Precio</td>
+            <td>@item.Total</td>
+        </tr>
+    }
 </table>
+
+<p> <a> Resumen </a></p>
+<p> <a href=""> Ir a vista  </a> </p>
+
+<hr />
+<br />
+<button class="btn btn-primary">primary</button>
+<button class="btn btn-danger">danger</button>
+<button class="btn btn-info">info</button>
+<button class="btn btn-success">success</button>
+<hr />
+<br />
+<a href="@Url.Action("RegistrarCompra", "Carrito")" class="btn btn-primary"> Registrar compra </a>
+ 
+
+@*  public int CantidadSeleccionada { get; set; }
+
+    public Producto Producto { get; set; }
+
+    public decimal Total*@
+
+
