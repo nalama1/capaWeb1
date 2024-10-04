@@ -26,9 +26,9 @@
     }
 </table>
 
-<p class="alert-success">Total a pagar es de </p>
+<p class="alert-success">Total a pagar es de @Model.Sum(x=> x.Total).ToString("C") </p>
 
-<a href="@Url.Action("Listado","Producto")" class="btn btn-success" ></a>
+<a href="@Url.Action("Listado","Producto")" class="btn btn-success" > Ir a Listado de productos</a>
 
 
 

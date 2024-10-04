@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Home Page";
-    @*comentario: Producto y CarritoItem sin vistas iguales*@
+    @*comentario: Producto y CarritoItem son vistas iguales*@
 
 }
 
@@ -42,7 +42,7 @@
             <td>@item.ProductoID</td>
             <td>@item.Nombre</td>
             <td>@item.Descripcion</td>
-            <td>@item.Precio</td>
+            <td>@item.Precio.ToString("C")</td>
             <td>@item.CantidadDisponible</td>
             <td>
             

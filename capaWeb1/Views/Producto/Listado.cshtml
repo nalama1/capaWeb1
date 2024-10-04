@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Entidades.Producto>
+
+@{
+    ViewBag.Title = "Listado";
+}
+
+
+<div class="jumbotron">
+
+    <h1>Listado de Productos</h1>
+
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadDisponible)
+        </th>
+        <th>Ruta</th>
+        <th>Acción</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductoID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.Precio.ToString())*@
+            @item.Precio.ToString("C")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadDisponible)
+        </td>
+        <td>
+            @*@Html.ActionLink("Agregar producto al carrito", "AgregarAlCarrito", "Carrito", new { codigo = item.ProductoID })*@
+            @Url.Action("AgregarAlCarrito", "Carrito", new { codigo = item.ProductoID })
+        </td>
+        <td>
+            <a href="@Url.Action("AgregarAlCarrito", "Carrito", new { codigo = item.ProductoID })">Añadir al carrito </a>
+        </td>
+    </tr>
+}
+
+</table>

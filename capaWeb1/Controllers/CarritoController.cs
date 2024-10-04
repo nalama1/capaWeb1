@@ -56,10 +56,10 @@ namespace capaWeb1.Controllers
             {
                 return RedirectToAction("Listado", "Producto");
             }
-            var userid = (int) Session["UserID"];
+            //var userid = (int) Session["UserID"];
 
             OrdenCompraBusiness _ordenCompraBusiness = new OrdenCompraBusiness();
-            bool bandera = _ordenCompraBusiness.grabarOrdenCompra(carrito, userid, "");
+            bool bandera = _ordenCompraBusiness.grabarOrdenCompra(carrito, 0, "");
 
             if (bandera) { Console.WriteLine("Se grabó correctamente."); }
 

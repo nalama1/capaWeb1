@@ -20,14 +20,25 @@ namespace capaAccesoDatos
         public bool grabarOrdenCompra(List<CarritoItem> carrito, int UsuarioID, string direccionEntrega)
         {
             bool bandera;
-            string q1 = "insert into Ordenes (UsuarioID, Fecha, Total, Estatus, DireccionEntrega) " +
-                        "output inserted.OrdenID" + //esto es para el ExecuteScalar()
-                        "values (@UsuarioID, @Fecha, @Total, @Estatus, @DireccionEntrega)";
-            string q2 = "insert into OrdenDetalles (OrdenID, ProductoID, Cantidad, PrecioUnitario, Total) " +
-                        "values (@OrdenID, @ProductoID, @Cantidad, @PrecioUnitario, @Total)";
-            string q3 = "update Producto" + 
-                        "set CantidadDisponible = CantidadDisponible - @cantidadSeleccionada" +
-                        "where ProductoID = @ProductoID" ;
+            string q1 = " insert into Ordenes (UsuarioID, Fecha, Total, Estatus, DireccionEntrega) " +
+                        " output inserted.OrdenID " + //esto es para el ExecuteScalar()
+                        " values (@UsuarioID, @Fecha, @Total, @Estatus, @DireccionEntrega)";
+            string q2 = " insert into OrdenDetalles (OrdenID, ProductoID, Cantidad, PrecioUnitario, Total) " +
+                        " values (@OrdenID, @ProductoID, @Cantidad, @PrecioUnitario, @Total)";
+            string q3 = " update Producto" + 
+                        " set CantidadDisponible = CantidadDisponible - @cantidadSeleccionada" +
+                        " where ProductoID = @ProductoID" ;
+
+            //lorena aqui
+            /* CantidadDisponible = 1
+             * cantidadSeleccionada = 2
+             * 
+             * if 1 CantidadDisponible es menor a cantidadSeleccionada
+             * console.log("No hay stock suficiente, se tiene la cantidad disponible de: " + 1)
+             * else
+             * ahi si actualizalo
+             * */
+
             try
             {
                 using (SqlConnection con = new SqlConnection(conexion_string))
@@ -62,7 +73,7 @@ namespace capaAccesoDatos
                             bandera = true;
                             transaction.Commit();
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             bandera = false;
                             transaction.Rollback();
