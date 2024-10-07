@@ -6,32 +6,55 @@
 
 <h2>Carrito2</h2>
 
-
-<table class="table table-responsive">
+@using (Html.BeginForm("RegistrarCompra", "Carrito", FormMethod.Post))
+{
+  <table class="table table-responsive">
     <tr>
         <th> Producto</th>
         <th> Cantidad</th>
         <th> Precio</th>
         <th> Total</th>
+        <th> Id</th>
     </tr>
+ 
+        
+      @for (int i = 0; i < Model.Count; i++)
+      {
+          <tr>
+              <td>
+                  @Model[i].Producto.Nombre @*input oculto, nombre de propiedad, valor de la propiedad*@
+                  <input type="hidden" name="carrito[@i].Producto.Nombre" value="@Model[i].Producto.Nombre" />                  
+              </td>             
+              <td>
+                  <input type="number" name="carrito[@i].CantidadSeleccionada" value="@Model[i].CantidadSeleccionada" min="1"
+                         class="form-control"
+                         onchange="calcularTotal(this, @Model[i].Producto.Precio, @Model[i].Producto.Nombre)" />                  
+              </td>
+              <td>
+                  @Model[i].Producto.Precio.ToString("C")
+                  <input type="hidden" name="carrito[@i].Producto.Precio" value="@Model[i].Producto.Precio" />
+              </td>
+              <td id="total-@Model[i].Producto.Nombre">
+                  @Model[i].Total.ToString("C")
+                  <input type="hidden" name="carrito[@i].Total" value="@Model[i].Total" />
+              </td>
+              <td>
+                  @Model[i].Producto.ProductoID
+                  <input type="hidden" name="carrito[@i].Producto.ProductoID" value="@Model[i].Producto.ProductoID" />
+              </td>
+ 
+          </tr>
+      }
 
-    <tr>
-        <td>Lorena Cujilema</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Producto.Nombre</td>
-            <td>@item.CantidadSeleccionada</td>
-            <td>@item.Producto.Precio</td>
-            <td>@item.Total</td>
-        </tr>
-    }
 </table>
+    
+    <button type="submit" class="btn btn-success" >Grabar compra here</button>
+    
+    <p>Total a pagar: <span id="total-a-pagar">@Model.Sum(x=> x.Total).ToString("C")  </span></p>
+  
+}
+
+
 
 <p> <a> Resumen </a></p>
 <p> <a href=""> Ir a vista  </a> </p>
@@ -44,13 +67,4 @@
 <button class="btn btn-success">success</button>
 <hr />
 <br />
-<a href="@Url.Action("RegistrarCompra", "Carrito")" class="btn btn-primary"> Registrar compra </a>
  
-
-@*  public int CantidadSeleccionada { get; set; }
-
-    public Producto Producto { get; set; }
-
-    public decimal Total*@
-
-

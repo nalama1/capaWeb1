@@ -49,9 +49,9 @@ namespace capaWeb1.Controllers
         }
 
         //nuevo: 2 octubre 2024
-        public ActionResult RegistrarCompra()
+        public ActionResult RegistrarCompra(List<CarritoItem> carrito)
         {
-            var carrito = Session["carrito"] as List<CarritoItem>;
+            //var carrito = Session["carrito"] as List<CarritoItem>;
             if (carrito == null || !carrito.Any())
             {
                 return RedirectToAction("Listado", "Producto");
