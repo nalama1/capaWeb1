@@ -28,7 +28,7 @@
               <td>
                   <input type="number" name="carrito[@i].CantidadSeleccionada" value="@Model[i].CantidadSeleccionada" min="1"
                          class="form-control"
-                         onchange="calcularTotal(this, @Model[i].Producto.Precio, @Model[i].Producto.Nombre)" />                  
+                         onchange="calcularTotalFila(this, @Model[i].Producto.Precio, '@Model[i].Producto.Nombre')" />                  
               </td>
               <td>
                   @Model[i].Producto.Precio.ToString("C")
@@ -49,7 +49,6 @@
 </table>
     
     <button type="submit" class="btn btn-success" >Grabar compra here</button>
-    
     <p>Total a pagar: <span id="total-a-pagar">@Model.Sum(x=> x.Total).ToString("C")  </span></p>
   
 }
@@ -58,7 +57,6 @@
 
 <p> <a> Resumen </a></p>
 <p> <a href=""> Ir a vista  </a> </p>
-
 <hr />
 <br />
 <button class="btn btn-primary">primary</button>
@@ -68,3 +66,29 @@
 <hr />
 <br />
  
+
+
+<script> //calcularTotalFila(this, Model[i].Producto.Precio, Model[i].Producto.Nombre)
+    function calcularTotalFila(elemento, precio, nombre) {
+        var cantidad = parseInt($(elemento).val());
+        if(cantidad > 0 && !isNaN(cantidad)){
+            var totalFila = cantidad * precio;
+            $('#total-' + nombre).text('$'+totalFila.toFixed(2));
+            actualizarTotalPagar();
+        } else {
+            $('#total-' + nombre).text('$0,00');
+        }
+    }
+    function actualizarTotalPagar() {
+        var totalPagar = 0;
+        $('td[id^= "total-"]').each(function () {
+            var totalProducto = parseFloat($(this).text().replace('$', ''));
+            if (!isNaN(totalProducto)) {
+                totalPagar = totalPagar + totalProducto;
+            }
+        });
+        $('#total-a-pagar').text(totalPagar);
+    }
+</script>
+
+
