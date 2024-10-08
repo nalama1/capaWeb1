@@ -222,6 +222,7 @@
     <Content Include="Views\Carrito\FinalizarCompra.cshtml" />
     <Content Include="Views\Producto\Listado.cshtml" />
     <Content Include="Views\Carrito\Carrito3.cshtml" />
+    <Content Include="Views\Carrito\Carrito4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
