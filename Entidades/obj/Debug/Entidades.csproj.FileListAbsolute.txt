@@ -2,3 +2,4 @@ C:\Users\DETPC\source\repos\capaWeb1\Entidades\bin\Debug\Entidades.dll
 C:\Users\DETPC\source\repos\capaWeb1\Entidades\bin\Debug\Entidades.pdb
 C:\Users\DETPC\source\repos\capaWeb1\Entidades\obj\Debug\Entidades.dll
 C:\Users\DETPC\source\repos\capaWeb1\Entidades\obj\Debug\Entidades.pdb
+C:\Users\DETPC\source\repos\capaWeb1\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache

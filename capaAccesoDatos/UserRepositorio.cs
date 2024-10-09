@@ -43,5 +43,46 @@ namespace capaAccesoDatos
                 throw;
             }
         }
+
+        public Users ConsultarUsuarioEspecifico(string usuario, string clave)
+        {
+            Users user = null;
+            string q1 = "select UserId, Username, PasswordHash, Email, FullName from Users where Username = @Username and PasswordHash = @clave";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conexion_string))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(q1, con))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", usuario);
+                        cmd.Parameters.AddWithValue("@clave", clave);
+                        using (SqlDataReader reader = cmd.ExecuteReader()) //el cursor executa el query
+                        {
+                            if (reader.Read()) // es crucial esto, para acceder a la 1era fila del cursor y leer la data
+                            {
+                                user = new Users
+                                {
+                                    UserId = (int)reader["UserId"],
+                                    Username = reader["Username"].ToString(),
+                                    PasswordHash = reader["PasswordHash"].ToString(),
+                                    Email = reader["Email"].ToString(),
+                                    FullName = reader["FullName"].ToString()
+                                };
+                            }                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+
+            return user;
+            //
+        }
+
     }
 }
